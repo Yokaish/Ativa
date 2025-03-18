@@ -11,6 +11,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -49,6 +53,9 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
 
+    // Estado para armazenar o username
+    var username by remember { mutableStateOf("Visitante") }
+
     val currentBackStackEntry = navController.currentBackStackEntryAsState().value
     val currentDestination = currentBackStackEntry?.destination
 
@@ -57,20 +64,40 @@ fun AppNavigation() {
     Scaffold(
         bottomBar = {
             if (showBottomBar) {
-                BottomNavigationBar(navController)
+                BottomNavigationBar(navController, username)  // Passa o username para a BottomNavigationBar
             }
         }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             NavHost(navController, startDestination = "login") {
-                composable("login") { LoginScreen(LoginScreenViewModel(), navController) }
-                composable("home") { DashboardScreen(navController) }
-                composable("equipe") { TeamScreen(navController) }
-                composable("settings") { SettingsScreen(navController) }
-                composable("feedbacks") { FeedbacksScreen(navController) }
+                composable("login") {
+                    LoginScreen(LoginScreenViewModel(), navController, onLoginSuccess = { user ->
+                        // Atualiza o username após login
+                        username = user
+                    })
+                }
+
+                composable("home/{username}") { backStackEntry ->
+                    val username = backStackEntry.arguments?.getString("username") ?: "Visitante"
+                    DashboardScreen(navController, username)
+                }
+                composable("equipe/{username}") { backStackEntry ->
+                    val username = backStackEntry.arguments?.getString("username") ?: "Visitante"
+                    TeamScreen(navController, username)
+                }
+                composable("settings/{username}") { backStackEntry ->
+                    val username = backStackEntry.arguments?.getString("username") ?: "Visitante"
+                    SettingsScreen(navController, username)
+                }
+                composable("feedbacks/{username}") { backStackEntry ->
+                    val username = backStackEntry.arguments?.getString("username") ?: "Visitante"
+                    FeedbacksScreen(navController, username)
+                }
             }
         }
     }
 }
+
+
 
 

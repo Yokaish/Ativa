@@ -23,7 +23,7 @@ import br.com.ativa.ui.theme.PoppinsRegular
 import br.com.ativa.ui.theme.PoppinsSemibold
 
 @Composable
-fun ProfileCard(modifier: Modifier) {
+fun ProfileCard(modifier: Modifier, username: String) {
     Column(
         modifier = modifier.fillMaxWidth() // O Column ocupa toda a largura
     ) {
@@ -47,7 +47,7 @@ fun ProfileCard(modifier: Modifier) {
                     modifier = Modifier.size(80.dp)
                 )
                 Text(
-                    text = "Kauã Gomes",
+                    text = username,
                     fontSize = 16.sp,
                     fontFamily = PoppinsSemibold,
                     color = Color(0xFF45525F)
@@ -67,5 +67,5 @@ fun ProfileCard(modifier: Modifier) {
 @Preview
 @Composable
 fun ProfileCardPreview() {
-    ProfileCard(modifier = Modifier)
+    ProfileCard(modifier = Modifier, username = "Kauã Gomes")
 }

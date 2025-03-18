@@ -36,7 +36,7 @@ import br.com.ativa.ui.theme.PoppinsRegular
 import br.com.ativa.ui.theme.PoppinsSemibold
 
 @Composable
-fun DashboardScreen(navController: NavController) {
+fun DashboardScreen(navController: NavController, username: String) {
     Box(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
@@ -45,7 +45,7 @@ fun DashboardScreen(navController: NavController) {
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Header(navController = navController, image = R.drawable.account)
-            Title(title = "Bem vindo, Kauã" ,subtitle = "Veja seu resumo de desempenho")
+            Title(title = "Bem vindo, $username" ,subtitle = "Veja seu resumo de desempenho")
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -91,8 +91,8 @@ fun DashboardScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(top = 32.dp),
                 label = "Feedbacks recentes",
-                title = "Kauã é massa!",
-                text = "Trabalho com o Kauã a 9 meses e ele é um dos colegas de trabalho mais dedicados e legais de se ter por perto. Pode contar com ele pra tudo. Ele sempre dará um jeito de te ajudar! "
+                title = "${username.replaceFirstChar { it.uppercaseChar() }} é massa!",
+                text = "Trabalho com o ${username.replaceFirstChar { it.uppercaseChar() }} a 9 meses e ele é um dos colegas de trabalho mais dedicados e legais de se ter por perto. Pode contar com ele pra tudo. Ele sempre dará um jeito de te ajudar! "
             )
 
             Row(
@@ -112,7 +112,7 @@ fun DashboardScreen(navController: NavController) {
                     .padding(top = 32.dp),
                 contentAlignment = Alignment.Center
             ) {
-                MainButton(text = "Veja mais feedbacks", font = PoppinsRegular, heightBtn = 42, onClick = {navController.navigate("feedbacks")})
+                MainButton(text = "Veja mais feedbacks", font = PoppinsRegular, heightBtn = 42, onClick = {navController.navigate("feedbacks/$username")})
             }
                 
             }
@@ -123,5 +123,5 @@ fun DashboardScreen(navController: NavController) {
 @Preview
 @Composable
 fun DashboardScreenPrev() {
-    DashboardScreen(navController = rememberNavController())
+    DashboardScreen(navController = rememberNavController(), username = "Kauã")
 }

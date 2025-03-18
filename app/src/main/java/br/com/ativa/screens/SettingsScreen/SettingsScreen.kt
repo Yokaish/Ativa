@@ -29,7 +29,7 @@ import br.com.ativa.ui.components.Title
 import br.com.ativa.ui.theme.PoppinsSemibold
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(navController: NavController, username: String) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +48,7 @@ fun SettingsScreen(navController: NavController) {
                 title = "Configurações da conta",
                 subtitle = "Suas informações pessoais serão absolutamente confidenciais para nós"
             )
-            ProfileCard(modifier = Modifier.padding(vertical = 16.dp))
+            ProfileCard(modifier = Modifier.padding(vertical = 16.dp), username = username)
             MainButton(onClick = { /*TODO*/ }, font = PoppinsSemibold , heightBtn = 40, text = "Editar Perfil")
             Column(
                 verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -73,6 +73,6 @@ fun SettingsScreen(navController: NavController) {
 @Preview
 @Composable
 fun SettingsScreenPreview() {
-    SettingsScreen(navController = rememberNavController())
+    SettingsScreen(navController = rememberNavController(), username = "Kauã")
 }
 

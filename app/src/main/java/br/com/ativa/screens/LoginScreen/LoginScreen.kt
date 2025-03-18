@@ -46,32 +46,26 @@ import br.com.ativa.ui.theme.PoppinsRegular
 import br.com.ativa.ui.theme.PoppinsSemibold
 
 @Composable
-fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavController) {
-
-//    var username by remember {
-//        mutableStateOf("")
-//    }
+fun LoginScreen(
+    loginScreenViewModel: LoginScreenViewModel,
+    navController: NavController,
+    onLoginSuccess: (String) -> Unit // Função callback para passar o username
+) {
 
     val username by loginScreenViewModel.username.observeAsState(initial = "")
     val email by loginScreenViewModel.email.observeAsState(initial = "")
     val password by loginScreenViewModel.password.observeAsState(initial = "")
-
 
     var passwordVisible by remember {
         mutableStateOf(false)
     }
 
     val errorUsername by loginScreenViewModel.errorUsername.observeAsState(initial = false)
-
     val errorEmail by loginScreenViewModel.errorEmail.observeAsState(initial = false)
-
     val errorPassword by loginScreenViewModel.errorPassword.observeAsState(initial = false)
-
 
     val annotatedTerms = buildAnnotatedString {
         append("Eu concordo com os ")
-
-        // Estilizando "Terms & Privacy" juntos
         pushStringAnnotation(tag = "TERMS", annotation = "terms_privacy")
         withStyle(style = SpanStyle(color = Color(0xFF1E1E1E), textDecoration = TextDecoration.Underline)) {
             append("Termos e Privacidade")
@@ -81,8 +75,6 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
 
     val annotatedSignUp = buildAnnotatedString {
         append("Não possui uma conta?")
-
-        // Estilizando "Terms & Privacy" juntos
         pushStringAnnotation(tag = "SIGNUP", annotation = "sign_up")
         withStyle(style = SpanStyle(color = Color(0xFFE01257), fontFamily = PoppinsSemibold)) {
             append(" Registre-se")
@@ -111,7 +103,7 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
                 fontSize = 16.sp,
                 color = Color(0xFF1E1E1E),
                 modifier = Modifier.padding(vertical = 36.dp)
-            ) // Padding abaixo do texto)
+            )
 
             Column() {
                 FormInput(
@@ -121,7 +113,7 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
                     onValueChange = {
                         loginScreenViewModel.onUsernameChanged(it)
                         loginScreenViewModel.onErrorUsernameChanged(it)
-                                    },
+                    },
                     keyboardType = KeyboardType.Text
                 )
 
@@ -129,15 +121,16 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
                     Text(text = "O campo de username não pode ficar vazio", color = Color.Red, modifier = Modifier.padding(top = 2.dp), fontFamily = PoppinsRegular, fontSize = 12.sp)
                 }
 
-
                 Spacer(modifier = Modifier.height(22.dp))
 
                 FormInput(
                     modifier = Modifier,
                     label = "E-mail",
                     value = email,
-                    onValueChange = { loginScreenViewModel.onEmailChanged(it)
-                                    loginScreenViewModel.onErrorEmailChanged(it)},
+                    onValueChange = {
+                        loginScreenViewModel.onEmailChanged(it)
+                        loginScreenViewModel.onErrorEmailChanged(it)
+                    },
                     keyboardType = KeyboardType.Email
                 )
 
@@ -151,14 +144,16 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
                     modifier = Modifier,
                     label = "Senha",
                     value = password,
-                    onValueChange = { loginScreenViewModel.onPasswordChanged(it)
-                                    loginScreenViewModel.onErrorPasswordChanged(it)},
+                    onValueChange = {
+                        loginScreenViewModel.onPasswordChanged(it)
+                        loginScreenViewModel.onErrorPasswordChanged(it)
+                    },
                     alternateLink = "Esqueceu sua senha?",
-                    keyboardType = KeyboardType.Text, // Manter sempre como Text
+                    keyboardType = KeyboardType.Text,
                     visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     passwordIcon = if (passwordVisible) R.drawable.open_eye else R.drawable.eye_closed,
                     iconModifier = Modifier
-                        .clickable { passwordVisible = !passwordVisible } // Torna o ícone clicável
+                        .clickable { passwordVisible = !passwordVisible }
                         .size(24.dp)
                 )
 
@@ -173,10 +168,19 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
 
             Spacer(modifier = Modifier.height(42.dp))
 
-            MainButton(text = "Entrar", font = PoppinsSemibold, heightBtn = 48, onClick = {
-                loginScreenViewModel.checkInputError(
-                    email, username, password, { navController.navigate("home") }
-                ) }, modifier = Modifier.fillMaxWidth()
+            MainButton(
+                text = "Entrar",
+                font = PoppinsSemibold,
+                heightBtn = 48,
+                onClick = {
+                    loginScreenViewModel.checkInputError(
+                        email, username, password, {
+                            onLoginSuccess(username)  // Chama a função callback com o username
+                            navController.navigate("home/$username") // Navega para a home
+                        }
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
             )
 
             Text(
@@ -188,7 +192,6 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
                     color = Color(0xFF1E1E1E),
                 ),
                 modifier = Modifier.padding(top = 22.dp),
-
             )
         }
     }
@@ -197,5 +200,5 @@ fun LoginScreen(loginScreenViewModel: LoginScreenViewModel, navController: NavCo
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(LoginScreenViewModel(), navController = rememberNavController())
+    LoginScreen(LoginScreenViewModel(), navController = rememberNavController(), onLoginSuccess = {})
 }

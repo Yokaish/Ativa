@@ -34,7 +34,7 @@ import br.com.ativa.ui.components.Title
 import br.com.ativa.ui.theme.PoppinsRegular
 
 @Composable
-fun FeedbacksScreen(navController: NavController) {
+fun FeedbacksScreen(navController: NavController, username: String) {
     Box(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
@@ -99,15 +99,15 @@ fun FeedbacksScreen(navController: NavController) {
 
             Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 ReactionFeedback(
-                    text = "Eu gosto muito de trabalhar com Kauã, é uma pessoa fácil de...",
+                    text = "Eu gosto muito de trabalhar com $username, é uma pessoa fácil de...",
                     reactDescription = "very_happy"
                 )
                 ReactionFeedback(
-                    text = "Kauã é um pouco distante.",
+                    text = "$username é um pouco distante.",
                     reactDescription = "neutral"
                 )
                 ReactionFeedback(
-                    text = "Kauã é muito gente boa. Ele está sempre disponível quando pre...",
+                    text = "$username é muito gente boa. Ele está sempre disponível quando pre...",
                     reactDescription = "happy"
                 )
             }
@@ -166,5 +166,5 @@ fun FeedbacksScreen(navController: NavController) {
 @Preview
 @Composable
 fun FeedbacksScreenPreview() {
-    FeedbacksScreen(navController = rememberNavController())
+    FeedbacksScreen(navController = rememberNavController(), username = "Kauã")
 }

@@ -30,6 +30,7 @@ import br.com.ativa.ui.theme.PoppinsRegular
 @Composable
 fun TeamScreen(
     navController: NavController,
+    username: String
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
@@ -50,8 +51,8 @@ fun TeamScreen(
 
                EmployeeCard(
                    image = R.drawable.profile_picture,
-                   role = "Developer",
-                   name = "Kauã Gomes",
+                   role = "Mobile Developer",
+                   name = "$username",
                    employData = "Funcionário desde 2025"
                )
 
@@ -96,6 +97,6 @@ fun TeamScreen(
 @Composable
 fun TeamScreenPreview() {
     TeamScreen(
-        navController = rememberNavController(),
+        navController = rememberNavController(), username = "Kauã",
     )
 }
