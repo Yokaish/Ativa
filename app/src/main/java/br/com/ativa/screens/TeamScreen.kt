@@ -41,7 +41,7 @@ fun TeamScreen(
        Column(
        ) {
 
-           Header(navController = navController, image = R.drawable.account)
+           Header(navController = navController, image = R.drawable.account, route = "settings/$username")
            Title(title = "Veja sua equipe")
 
            Column(

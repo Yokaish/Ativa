@@ -42,7 +42,7 @@ fun FeedbacksScreen(navController: NavController, username: String) {
         .padding(vertical = 30.dp, horizontal = 30.dp))
     {
         Column() {
-            Header(navController = navController, image = R.drawable.account)
+            Header(navController = navController, image = R.drawable.account, route = "settings/$username")
             Title(title = "Seus feedbacks")
             Row(modifier = Modifier
                 .fillMaxWidth()

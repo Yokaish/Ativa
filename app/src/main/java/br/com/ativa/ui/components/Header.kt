@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import br.com.ativa.R
 
 @Composable
-fun Header(navController: NavController, @DrawableRes image: Int? = null) {
+fun Header(navController: NavController, @DrawableRes image: Int? = null, route: String) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -43,7 +43,7 @@ fun Header(navController: NavController, @DrawableRes image: Int? = null) {
                     contentDescription = "Ícone de Conta",
                     tint = Color(0xFFE01257),
                     modifier = Modifier.size(28.dp).clickable {
-                        navController.navigate("settings") {
+                        navController.navigate(route) {
                             launchSingleTop = true // Evita empilhar múltiplas telas de settings
                         }
                     }

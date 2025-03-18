@@ -44,7 +44,7 @@ fun DashboardScreen(navController: NavController, username: String) {
         .padding(vertical = 30.dp, horizontal = 30.dp)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            Header(navController = navController, image = R.drawable.account)
+            Header(navController = navController, image = R.drawable.account, route = "settings/$username")
             Title(title = "Bem vindo, $username" ,subtitle = "Veja seu resumo de desempenho")
             Row(
                 modifier = Modifier

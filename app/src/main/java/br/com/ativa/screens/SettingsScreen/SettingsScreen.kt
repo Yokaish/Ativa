@@ -40,7 +40,7 @@ fun SettingsScreen(navController: NavController, username: String) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Header(navController = navController)
+            Header(navController = navController, route = "settings/$username")
 
             // Adiciona um espaçamento entre o Header e o Title
 
