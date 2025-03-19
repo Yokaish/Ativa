@@ -52,7 +52,7 @@ fun TeamScreen(
                EmployeeCard(
                    image = R.drawable.picture_1,
                    role = "Mobile Developer",
-                   name = "$username",
+                   name = "${username.replaceFirstChar { it.uppercaseChar() }}",
                    employData = "Funcionário desde 2025"
                )
 

@@ -48,7 +48,7 @@ fun SettingsScreen(navController: NavController, username: String) {
                 title = "Configurações da conta",
                 subtitle = "Suas informações pessoais serão absolutamente confidenciais para nós"
             )
-            ProfileCard(modifier = Modifier.padding(vertical = 16.dp), username = username)
+            ProfileCard(modifier = Modifier.padding(vertical = 16.dp), username = username.replaceFirstChar { it.uppercaseChar()})
             MainButton(onClick = { /*TODO*/ }, font = PoppinsSemibold , heightBtn = 40, text = "Editar Perfil")
             Column(
                 verticalArrangement = Arrangement.spacedBy(6.dp),

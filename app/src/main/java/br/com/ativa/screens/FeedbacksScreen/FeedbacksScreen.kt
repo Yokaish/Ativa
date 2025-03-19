@@ -99,15 +99,15 @@ fun FeedbacksScreen(navController: NavController, username: String) {
 
             Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 ReactionFeedback(
-                    text = "Eu gosto muito de trabalhar com $username, é uma pessoa fácil de...",
+                    text = "Eu gosto muito de trabalhar com ${username.replaceFirstChar { it.uppercaseChar() }}, é uma pessoa fácil de...",
                     reactDescription = "very_happy"
                 )
                 ReactionFeedback(
-                    text = "$username é um pouco distante.",
+                    text = "${username.replaceFirstChar { it.uppercaseChar() }} é um pouco distante.",
                     reactDescription = "neutral"
                 )
                 ReactionFeedback(
-                    text = "$username é muito gente boa. Ele está sempre disponível quando pre...",
+                    text = "${username.replaceFirstChar { it.uppercaseChar() }} é muito gente boa. Ele está sempre disponível quando pre...",
                     reactDescription = "happy"
                 )
             }
