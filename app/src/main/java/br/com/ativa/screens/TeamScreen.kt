@@ -50,37 +50,37 @@ fun TeamScreen(
            ) {
 
                EmployeeCard(
-                   image = R.drawable.profile_picture,
+                   image = R.drawable.picture_1,
                    role = "Mobile Developer",
                    name = "$username",
                    employData = "Funcionário desde 2025"
                )
 
                EmployeeCard(
-                   image = R.drawable.profile_picture,
-                   role = "Developer",
-                   name = "Kauã Gomes",
-                   employData = "Funcionário desde 2025"
+                   image = R.drawable.picture_2,
+                   role = "UI/UX Designer",
+                   name = "Geovana Mendes",
+                   employData = "Funcionário desde 2022"
                )
 
                EmployeeCard(
-                   image = R.drawable.profile_picture,
+                   image = R.drawable.picture_3,
                    role = "Developer",
-                   name = "Kauã Gomes",
-                   employData = "Funcionário desde 2025"
+                   name = "Sabrina Alves",
+                   employData = "Funcionário desde 2024"
                )
 
                EmployeeCard(
-                   image = R.drawable.profile_picture,
+                   image = R.drawable.picture_4,
                    role = "Developer",
-                   name = "Kauã Gomes",
-                   employData = "Funcionário desde 2025"
+                   name = "Fernando Oliveira",
+                   employData = "Funcionário desde 2024"
                )
 
                EmployeeCard(
-                   image = R.drawable.profile_picture,
+                   image = R.drawable.picture_5,
                    role = "Developer",
-                   name = "Kauã Gomes",
+                   name = "Samuel Silva",
                    employData = "Funcionário desde 2025"
                )
            }

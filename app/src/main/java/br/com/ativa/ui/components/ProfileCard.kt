@@ -42,7 +42,7 @@ fun ProfileCard(modifier: Modifier, username: String) {
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.profile_picture),
+                    painter = painterResource(id = R.drawable.profile_picture_ok),
                     contentDescription = "Foto de Perfil",
                     modifier = Modifier.size(80.dp)
                 )
